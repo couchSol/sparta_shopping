@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!--    google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+
+    <title>무드등 주문페이지 | 부트스트랩 연습하기</title>
+
+    <style>
+        * {
+            font-family: 'Noto Serif KR', serif;
+        }
+        .image {
+            display: block;
+            margin: 30px auto;
+            width: 450px;
+        }
+        .sheet {
+            width: 500px;
+            margin: 0px auto 100px;
+        }
+        .price {
+            font-size: medium;
+        }
+        #rate{
+            color: cornflowerblue;
+            margin-bottom: 5px;
+        }
+        #ratedescript{
+            color: dimgray;
+            font-style: italic;
+            margin-botton: 50px;
+        }
+        .odbtn{
+            display: block;
+            margin: auto;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD",
+                data: {},
+                success: function (response) {
+                    const dollarprice = response[0]['cashBuyingPrice']
+                    let temp_html = `현재 달러-원 환율: ${dollarprice}원`
+                    $('#rate').text(temp_html)
+                }
+            })
+        });
+
+        function btnalert(){
+            alert('주문이 완료되었습니다.');
+        }
+    </script>
+</head>
+
+<body>
+<img src="http://webimage.10x10.co.kr/image/tenten600/381/T003812529.jpg" alt="yellow mini desk lamp" class="image">
+<div class="sheet">
+    <h3><b>작은 무드등을 들여보세요 <span class="price">가격: 19000원/개</span></b></h3>
+    <p>아아 크기의 작은 무드등이 어두운 밤 홀로 코딩하는 당신의 책상을 밝혀 줄 것입니다.<br>
+        꽃잎 같은 귀여운 곡선과 발랄한 색감이 눈을 사로잡고, 색과 밝기 조절이 가능한 전구로 기능 또한 충실합니다.<br>
+        저도 어제 홀려서 결제했습니다.<pre></pre></p>
+    <p id="rate">현재 달러-원 환율:   원</p>
+    <p id="ratedescript">페이지를 새로고침하면 환율이 업데이트 됩니다</p>
+    <h3><b>주문하기</b></h3>
+    <form>
+    <div class="form-group">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="inputCity">주문자 성함</label>
+                <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="form-group">
+                <label for="inputState">수량</label>
+                <select id="inputState" class="form-control">
+                    <option selected>수량을 선택하세요</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">주소</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">전화번호</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="000-0000-0000">
+            </div>
+        </div>
+    </div>
+    <button onclick="btnalert()" type="submit" class="btn btn-primary odbtn">주문하기</button>
+    </form>
+</div>
+
+</body>
+</html>
